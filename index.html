@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BladeUp Barber</title>
+<style>
+/* RESET */
+body, h1, h2, h3, p, select, input, button { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+
+/* BODY */
+body {
+    background-color:#000;
+    color:#FFD700;
+    text-align:center;
+}
+
+/* HEADER */
+header {
+    padding:20px;
+}
+header img {
+    width:150px;
+    cursor:pointer;
+}
+h1 { margin:10px 0; }
+
+/* SECCIONES */
+.section { padding:20px; }
+.gallery { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:10px; }
+.gallery img { width:100%; border-radius:10px; transition: transform 0.3s; }
+.gallery img:hover { transform: scale(1.05); }
+
+/* BOTONES Y FORMULARIOS */
+button { background:#FFD700; border:none; padding:10px 20px; margin-top:10px; border-radius:10px; font-weight:bold; cursor:pointer; }
+select, input { width:100%; padding:10px; margin-top:10px; border-radius:10px; border:none; }
+
+/* BOTÓN FLOTANTE WHATSAPP */
+.whatsapp {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    padding:15px;
+    border-radius:50%;
+    font-size:20px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" id="logo">
+    <h1>BladeUp Barber</h1>
+    <p>🔥 20% DESCUENTO PRIMERA VISITA 🔥</p>
+</header>
+
+<!-- RESERVAS -->
+<div class="section">
+<h2>💇 Reserva tu cita</h2>
+
+<label>Servicio</label>
+<select id="servicio">
+    <option>Hombre - 35 CHF</option>
+    <option>Hombre + Barba - 45 CHF</option>
+    <option>Barba - 15 CHF</option>
+    <option>Niño - 25 CHF</option>
+</select>
+
+<label>Suscripción</label>
+<select id="suscripcion">
+    <option>Sin suscripción</option>
+    <option>Mensual - 120 CHF</option>
+    <option>Trimestral - 325 CHF (-10%)</option>
+    <option>Anual - 1212 CHF (-20%)</option>
+</select>
+
+<label>Fecha</label>
+<input type="date" id="fecha">
+
+<label>Hora</label>
+<input type="time" id="hora">
+
+<label>Ubicación</label>
+<select id="tipo">
+    <option>En barbería (Basel)</option>
+    <option>A domicilio</option>
+</select>
+
+<button onclick="reservar()">Reservar por WhatsApp</button>
+</div>
+
+<!-- GALERÍA -->
+<div class="section">
+<h2>🖼️ Galería de cortes</h2>
+<div class="gallery">
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+<img src="foto4.jpg">
+<img src="foto5.jpg">
+<img src="foto6.jpg">
+<img src="foto7.jpg">
+<img src="foto8.jpg">
+<img src="foto9.jpg">
+<img src="foto10.jpg">
+<img src="foto11.jpg">
+<img src="foto12.jpg">
+<img src="foto13.jpg">
+<img src="foto14.jpg">
+<img src="foto15.jpg">
+</div>
+</div>
+
+<!-- CONTACTO -->
+<div class="section">
+<h2>📞 Contacto</h2>
+<p>📧 bladepbarber@gmail.com</p>
+<p>📍 Basel</p>
+<p>🕐 Martes-Domingo: 9:00-12:00 | 13:00-21:00</p>
+<p>📱 WhatsApp: +41 77 962 10 95</p>
+</div>
+
+<!-- BOTÓN FLOTANTE -->
+<div class="whatsapp" onclick="abrirWSP()">💬</div>
+
+<script>
+// CLICK SECRETO PARA ADMIN
+let clicks = 0;
+document.getElementById("logo").onclick = () => {
+    clicks++;
+    if(clicks >= 5){
+        alert("🔐 Acceso a Panel Admin (próximamente)");
+        clicks = 0;
+    }
+}
+
+// RESERVA POR WHATSAPP
+function reservar(){
+    let servicio = document.getElementById("servicio").value;
+    let suscripcion = document.getElementById("suscripcion").value;
+    let fecha = document.getElementById("fecha").value;
+    let hora = document.getElementById("hora").value;
+    let tipo = document.getElementById("tipo").value;
+
+    let mensaje = `Hola BladeUp 💈
+Quiero reservar:
+
+✂️ Servicio: ${servicio}
+💰 Plan: ${suscripcion}
+📅 Fecha: ${fecha}
+🕐 Hora: ${hora}
+📍 Tipo: ${tipo}
+
+Confirmar cita 🙌`;
+
+    let url = "https://wa.me/41779621095?text=" + encodeURIComponent(mensaje);
+    window.open(url, "_blank");
+}
+
+// BOTÓN FLOTANTE WHATSAPP
+function abrirWSP(){
+    window.open("https://wa.me/41779621095", "_blank");
+}
+</script>
+
+</body>
+</html>
